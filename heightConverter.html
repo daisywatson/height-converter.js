@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Convert centimeters to inches </h1>
+<p>This converts centimters to feet and inches and rounds to the nearest inch.
+</p>
+</br>
+Input centimeters:
+
+<input id="centi">
+
+<button type="button" onclick="myFunction()">Submit</button>
+
+<p id="converter"></p>
+
+<script>
+function myFunction() {
+    var centiHeight, inchHeight, footHeight, remainderInch, text, output;
+
+    text = document.getElementById("converter");
+    text.innerHTML = "";
+    centiHeight = document.getElementById("centi").value;
+    try {
+       if(centiHeight == "")  throw ".";
+       if(isNaN(centiHeight)) throw ".";
+       centiHeight = Number(centiHeight);
+       if(centiHeight <= 0) throw " greater than 0. ";
+    }
+   catch(err) {
+      text.innerHTML = "Please enter a number" + err;
+   }
+
+    if (text.innerHTML == "")
+    {
+        //Conversion:
+        inchHeight = parseFloat(centiHeight * 0.3937007874);
+        footHeight = inchHeight / 12;
+        remainderInch = inchHeight % 12;
+        //Change values into integers and round inches:
+        footHeight = parseInt(footHeight);
+        remainderInch = parseInt(Math.round(remainderInch));
+        inchHeight = parseInt(Math.round(inchHeight));
+
+        if (remainderInch == 12)
+        {
+            remainderInch = 0;
+            footHeight += 1;
+        }
+
+        output = remainderInch + "default value " + footHeight;
+
+        if (inchHeight == 1)
+        {
+            output = centiHeight + " cm. in inches is " + inchHeight + " inch.";
+        }
+        else if (inchHeight < 12 && inchHeight > 1)
+        {
+            output = centiHeight + " cm. in inches is " + inchHeight + " inches.";
+        }
+        else if (footHeight == 1)
+        {
+            if (remainderInch == 1)
+            {
+                output = centiHeight + " cm. in feet is " + footHeight + " foot " +
+                remainderInch +  " inch.";
+            }
+            else if (remainderInch == 0)
+            {
+                output = centiHeight + " cm. in feet is " + footHeight + " foot.";
+            }
+            else {
+                output = centiHeight + " cm. in feet is " + footHeight + " foot " +
+                remainderInch +  " inches.";
+            }
+        }
+        else if (remainderInch == 1)
+        {
+            output = centiHeight + " cm. in feet is " + footHeight + " feet " +
+            remainderInch +  " inch.";
+        }
+        else if (remainderInch > 1)
+        {
+            output = centiHeight + " cm. in feet is " + footHeight + " feet " +
+            remainderInch +  " inches.";
+        }
+        else {
+            output = centiHeight + " cm. in feet is " + footHeight + " feet.";
+        }
+
+        document.getElementById("converter").innerHTML = output;
+    }
+}
+</script>
+
+</body>
+</html>
